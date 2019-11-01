@@ -18,6 +18,7 @@
     +   [图嵌入综述（Arxiv 1709.07604）](docs/ge-survey-arxiv-1709-07604-zh)
     +   [基于深度学习的推荐系统：综述和新视角](docs/rs-survey-arxiv-1707-07435-zh)
     +   [关于卷积神经网络我们理解了什么](docs/what-do-we-understand-about-convnet)
+    +   [机器学习超级复习笔记](docs/super-machine-learning-revision-notes)
 
 ## 赞助我们
 
