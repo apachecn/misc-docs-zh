@@ -50,10 +50,14 @@ Repeat{    W := W - learning_rate * dJ(W)/dW}
 
 通常，我们用![](img/tex-7b7f9dbfea05c83784f8b85149852f08.gif)表示学习率。 训练神经网络时，它是超参数之一（我们将在另一部分介绍更多的超参数）。 ![](img/tex-4defef41b60185408425fa0ea63eac78.gif)是我们模型的损失函数。 ![](img/tex-dbdcdf39866d05fdbc9f8dec59fccf91.gif)是参数![](img/tex-61e9c06ea9a85a5088a499df6458d276.gif)的梯度。 如果![](img/tex-61e9c06ea9a85a5088a499df6458d276.gif)是参数（权重）的矩阵，则![](img/tex-dbdcdf39866d05fdbc9f8dec59fccf91.gif)将是每个参数（即![](img/tex-322b227441558f0ed48aba836d0caf6f.gif)）的梯度矩阵。
 
-**问题：** **为什么在最小化损失函数时减去梯度而不加梯度？**
+**问题**： **为什么在最小化损失函数时减去梯度而不加梯度？**
+
 答案：
+
 例如，我们的损失函数为![](img/tex-24e8d8f6411751ffb862e218425f6388.gif)，可能看起来像：
+
 ![gradient descent](img/421af2fd66e7963c232cfa3719d7024e.jpg)
+
 当![](img/tex-c5a65f66777c1d50a48d7622ed480d11.gif)时，梯度为![](img/tex-32213aabf4676ffc1ee9dae494989217.gif)。 显然，如果我们要找到![](img/tex-4defef41b60185408425fa0ea63eac78.gif)的最小值，则梯度的相反方向（例如![](img/tex-258af587813565bc42b2be1dd0683237.gif)）是找到局部最低点（即![](img/tex-94137d3842b8e8d6027ef9d99c59c6f3.gif)）的正确方向。
 
 但是有时，梯度下降法可能会遇到局部最优问题。
@@ -63,20 +67,29 @@ Repeat{    W := W - learning_rate * dJ(W)/dW}
 #### 计算图
 
 该计算图示例是从[DeepLearningAI](https://www.deeplearning.ai/) 的第一门课程中学到的。
+
 假设我们有3个可学习的参数![](img/tex-0cc175b9c0f1b6a831c399e269772661.gif)，![](img/tex-92eb5ffee6ae2fec3ad71c777531578f.gif)和![](img/tex-4a8a08f09d37b73795649038408b5f33.gif)。 成本函数为![](img/tex-2e42f7774d66008a22a41cae45d139f5.gif)。 接下来，我们需要计算参数的梯度：![](img/tex-580c0362e5e953e0724adbd8d5423604.gif)，![](img/tex-f9edac4cbb3fcd39611314703005ec52.gif)和![](img/tex-6a2d814ef8a3e987884a5f0256cf7d0b.gif)。 我们还定义：![](img/tex-9bd7a11933cc798a7dd2b4c474f2574e.gif)，![](img/tex-f65940b5a322251511f9570520c8796e.gif)和![](img/tex-fdcf1c4788da9258bb0f04abfeec7a02.gif)。 该计算可以转换成下面的计算图：
+
 ![forward computation](img/d274b4579721330841220f50c5b0bda7.jpg)
 
 
 
-#### -反向传播
+#### 反向传播
 
 从上图可以明显看出，参数的梯度为：![](img/tex-23327b5cda66de85cecf97b7b44ed599.gif)，![](img/tex-3e61620a7062469797fdf9a5c9c87a9d.gif)和![](img/tex-ee64ffbfc03289770deb1ef8d90cf59a.gif)。
+
 计算每个节点的梯度很容易，如下所示。 （提示：实际上，如果您正在实现自己的算法，则可以在正向过程中计算梯度以节省计算资源和训练时间。因此，在进行反向传播时，无需再次计算每个节点的梯度 。）
+
 ![gradient of each node](img/3907d35c854cfdeaa7c949d2d02cbd30.jpg)
+
 现在，我们可以通过简单地组合节点梯度来计算每个参数的梯度：
+
 ![backpropagation](img/0faa55168ecfc132ba12ebf7ef304d52.jpg)
+
 ![](img/tex-aa20fcf51f359a7aa6c1ee4dfdabede2.gif)
+
 ![](img/tex-ac0ed3b7e036c0ab1bbbaed06a88514b.gif)
+
 ![](img/tex-3a5b8c68810f07dbc554c1b08da42a53.gif)
 
 #### L2正则化的梯度（权重衰减）
@@ -198,7 +211,22 @@ For t= (1, ... , #Batches):
 
 6）![](img/tex-e8cc103eadb7f153d0fb22c628b92cd3.gif)
 
-7）![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-42c4f85396cc3e77df0477745c546901.gif) ![](img/tex-f02676ceb92c11ff7dc9df6ad0eda1ad.gif)
+7）![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-42c4f85396cc3e77df0477745c546901.gif) 
+
+![](img/tex-f02676ceb92c11ff7dc9df6ad0eda1ad.gif)
+
 ![](img/tex-9ad8d6a5b8ec30f7aa8e665c105b708d.gif)
 
 “校正”是指数加权平均值中的[“偏差校正”](https://www.youtube.com/watch?v=lWzo8CajF5s) 的概念。 该校正可以使平均值的计算更加准确。 ![](img/tex-e358efa489f58062f10dd7316b65649e.gif)是![](img/tex-b0603860fcffe94e5b8eec59ed813421.gif)的权重。
@@ -218,6 +246,7 @@ For t= (1, ... , #Batches):
 ##### 基于周期数的衰减
 
 ![train phrase](img/1c4945b5053561037eda73cd94e5a391.jpg)
+
 根据周期数降低学习率是一种直接的方法。 以下是速率衰减公式。
 
 例如，初始![](img/tex-87526aa5fefff3f11caff9cde7ea0383.gif)和衰减率是1.0。 每个周期的学习率是：
@@ -255,7 +284,9 @@ For t= (1, ... , #Batches):
 每层![](img/tex-2db95e8e1a9267b7a1188556b2013b33.gif)中的批量规范化的详细信息是：
 
 ![](img/tex-4121a98dea501099148e235e7c1b3267.gif)
+
 ![](img/tex-afe1939832cf82088c2a1d27f81f875d.gif)
+
 ![](img/tex-443ec804457703e73c1ec99f6cdf211e.gif)
 
 ![](img/tex-7b7f9dbfea05c83784f8b85149852f08.gif)和![](img/tex-b0603860fcffe94e5b8eec59ed813421.gif)是此处可学习的参数。
@@ -292,7 +323,7 @@ For t= (1, ... , #Batches):
 
 #### 参数初始化
 
-（**注意：**实际上，机器学习框架（例如tensorflow，chainer等）已经提供了强大的参数初始化功能。）
+（**注意**：实际上，机器学习框架（例如tensorflow，chainer等）已经提供了强大的参数初始化功能。）
 
 ##### 小初始值
 
@@ -346,7 +377,7 @@ Ng 推荐以下超参数优先级：
 | 1 | 学习率![](img/tex-7b7f9dbfea05c83784f8b85149852f08.gif) |
 | 2 | ![](img/tex-b4ceec2c4656f5c1e7fc76c59c4f80f3.gif)，![](img/tex-d9f51e864a6151f57e727294da7ac28c.gif)和![](img/tex-92e4da341fe8f4cd46192f21b6ff3aa7.gif)（动量和RMSprop的参数） |
 | 2 | 隐藏单元数 |
-| 2 | 小批量 |
+| 2 | 批量大小 |
 | 3 | 层数 |
 | 3 | 学习率衰减数 |
 
@@ -354,7 +385,7 @@ Ng 推荐以下超参数优先级：
 
 ##### 隐藏单元和层的均匀样本
 
-例如，如果层数的范围是2-6，我们可以统一尝试使用2、3、4、5、6来训练模型。 同样，对于50-100的隐藏单位，在这种比例下选择值是一个很好的策略。
+例如，如果层数的范围是2-6，我们可以统一尝试使用2、3、4、5、6来训练模型。 同样，对于50-100的隐藏单元，在这种比例下选择值是一个很好的策略。
 
 例：
 
@@ -423,12 +454,12 @@ Ng 推荐以下超参数优先级：
 
 在Dropout正则化中，超参数“保持概率”描述了激活隐藏单元的几率。 因此，如果隐藏层具有![](img/tex-7b8b965ad4bca0e41ab51de7b31363a1.gif)个单元，并且概率为![](img/tex-83878c91171338902e0fe0fb97a8c47a.gif)，则将激活![](img/tex-6b9b0200ec71d987f83ff9ef61647f50.gif)左右的单元，并关闭![](img/tex-15759ee09f973553c9e5533ebd00215b.gif)左右的单元。
 
-**示例：**
+**示例**：
 ![dropout example](img/21cb3a48039ab84ebda8331da49fa20b.jpg)
 
-如上所示，丢弃了第二层的2个单位。 因此，第三层的线性组合值（即![](img/tex-babca7ea11cb55200ed2d0f6c49049b3.gif)）将减小。 为了不降低![](img/tex-fbade9e36a3f36d3d676c1b808451dd7.gif)的期望值，应通过除以保持概率来调整![](img/tex-91262bc83ff35add8629010dd1d6ed0d.gif)的值。 也就是说：![](img/tex-5b3b83e8e3831d7ebadc1ad1021e6b62.gif)
+如上所示，丢弃了第二层的2个单元。 因此，第三层的线性组合值（即![](img/tex-babca7ea11cb55200ed2d0f6c49049b3.gif)）将减小。 为了不降低![](img/tex-fbade9e36a3f36d3d676c1b808451dd7.gif)的期望值，应通过除以保持概率来调整![](img/tex-91262bc83ff35add8629010dd1d6ed0d.gif)的值。 也就是说：![](img/tex-5b3b83e8e3831d7ebadc1ad1021e6b62.gif)
 
-**注意：**在测试时进行预测时，不需要进行Dropout正则化。
+**注意**：在测试时进行预测时，不需要进行Dropout正则化。
 
 
 
@@ -445,14 +476,19 @@ Ng 推荐以下超参数优先级：
 
 给定实例的特征向量![](img/tex-9dd4e461268c8034f5c8564e155c67a6.gif)，逻辑回归模型的输出为![](img/tex-15caf6e5bf502acdf048fa050fc2ad16.gif)。 因此，概率为![](img/tex-a7999a242c6970ff17577d615cdaa529.gif)。 在逻辑回归中，可学习的参数为![](img/tex-61e9c06ea9a85a5088a499df6458d276.gif)和![](img/tex-92eb5ffee6ae2fec3ad71c777531578f.gif)。
 
-x轴是![](img/tex-c723b4869079c11fecd882437c798bfd.gif)的值，y轴是![](img/tex-15caf6e5bf502acdf048fa050fc2ad16.gif)。 （图片从[维基百科](https://en.wikipedia.org/wiki/Sigmoid_function)下载）
+x轴是![](img/tex-c723b4869079c11fecd882437c798bfd.gif)的值，y轴是![](img/tex-15caf6e5bf502acdf048fa050fc2ad16.gif)。
+
+（图片从[维基百科](https://en.wikipedia.org/wiki/Sigmoid_function)下载）
+
 ![logistic curve](img/ad42794031668d9e27c2367c31c60561.jpg)
+
 **一个训练实例![](img/tex-b0ed6d63df3fc6a8176ded0cb5d8674a.gif)的损失函数**：
 
 ![](img/tex-ec565cc58baf9512cc892f4d65012394.gif)是预测，![](img/tex-6610e90a866df920aef970e64d297339.gif)是真实答案。 整个训练数据集的
 **成本函数**（![](img/tex-6f8f57715090da2632453988d9a1501b.gif)是训练数据集中的示例数）：
 
 **最小化成本函数实际上是最大化数据的似然。**
+
 ![](img/tex-8f9e617b3a25bfe0c59ca6a508496e67.gif)
 
 
@@ -460,6 +496,7 @@ x轴是![](img/tex-c723b4869079c11fecd882437c798bfd.gif)的值，y轴是![](img/
 #### 多类别分类（Softmax回归）
 
 ![Softmax Regression](img/80f8b882203cdd4899ebf42e12130891.jpg)
+
 softmax回归将logistic回归（二元分类）概括为多个类（多类分类）。
 
 如上图所示，它是3类分类神经网络。 在最后一层，使用softmax激活函数。 输出是每个类别的概率。
@@ -477,6 +514,7 @@ softmax激活如下。
 ##### 损失函数
 
 ![](img/tex-3595e5aa15485bc35e32ee9c82740adf.gif)
+
 ![](img/tex-e680f0d21f27ba27274a00712c6fc965.gif)
 
 ![](img/tex-6f8f57715090da2632453988d9a1501b.gif)是训练实例的数量。 ![](img/tex-363b122c528f54df4a0446b6bab05515.gif)是第j类。
@@ -494,11 +532,13 @@ softmax激活如下。
 如果我们有很多数据，我们可以重新训练整个神经网络。 另一方面，如果我们的训练小，则可以重新训练最后几层或最后几层（例如，最后两层）。
 
 **在哪种情况下我们可以使用迁移学习？**
+
 假设：
+
 预先训练的模型用于任务A，而我们自己的模型用于任务B。
 
 *   这两个任务应具有相同的输入格式
-*   对于任务A，我们有很多训练数据。 但是对于任务B，数据大小的大小要小得多
+*   对于任务A，我们有很多训练数据。 但是对于任务B，数据的大小要小得多
 *   从任务A中学到的低级特征可能有助于训练任务B的模型。
 
 
@@ -510,12 +550,14 @@ softmax激活如下。
 但是，在多任务学习中，一个实例可能具有多个标签。
 
 在任务中，损失函数为：
+
 ![](img/tex-4601739b486f2ce53da45d4f47612b06.gif)
+
 ![](img/tex-6381f1aa41c898a06853a7f67d226cd0.gif)
 
 ![](img/tex-6f8f57715090da2632453988d9a1501b.gif)是训练实例的数量。 ![](img/tex-363b122c528f54df4a0446b6bab05515.gif)是第j类。
 
-**多任务学习提示：**
+**多任务学习提示**：
 
 *   多任务学习模型可以共享较低级别的特征
 *   我们可以尝试一个足够大的神经网络以在所有任务上正常工作
@@ -584,8 +626,11 @@ softmax激活如下。
 #### `1 * 1`卷积
 
 如果不使用1X1转换层，则计算成本存在问题：
+
 ![when not use 1*1 CONV](img/715d40440d78d5b1e21facc745c40fa8.jpg)
+
 使用1X1转换层，参数数量大大减少：
+
 ![when use 1*1 CONV](img/d0579d7fa3dd105c79cc592c43d4bfa6.jpg)
 
 
@@ -606,17 +651,20 @@ softmax激活如下。
 #### LeNet-5
 
 ![LeNet-5](img/5803be278b1c5d9c1993f29675176e0b.jpg)
-（模型中约60k参数）
+
+（模型中有约60k参数）
 
 #### AlexNet
 
 ![AlexNet](img/0bd66690aa5d0d73796a74ce988a69cd.jpg)
-（模型中约60m的参数；使用Relu激活函数；）
+
+（模型中有约60m的参数；使用Relu激活函数；）
 
 #### VGG-16
 
 ![VGG-16](img/70065677a3527f465f8f82af0d21ca7b.jpg)
-（模型中大约138m的参数；所有滤波器中![](img/tex-4d6b51eb80bbd1b1ffc5964a2865c2e1.gif)，![](img/tex-73bbe012edfb61eca43444d61fefe937.gif)并使用相同的填充；在最大池化层中![](img/tex-12a3f108b86e94beb6ea93b18dc3384d.gif)和![](img/tex-23b583065f5b7336c728011ccd7375b2.gif)）
+
+（模型中有大约138m的参数；所有滤波器中![](img/tex-4d6b51eb80bbd1b1ffc5964a2865c2e1.gif)，![](img/tex-73bbe012edfb61eca43444d61fefe937.gif)并使用相同的填充；在最大池化层中![](img/tex-12a3f108b86e94beb6ea93b18dc3384d.gif)和![](img/tex-23b583065f5b7336c728011ccd7375b2.gif)）
 
 
 #### ResNet（功能更强大）
@@ -640,6 +688,7 @@ softmax激活如下。
 ![Classification with Localisation](img/a28bc9646d6228e89605daccc4e31300.jpg)
 
 **损失函数**：
+
 ![Classification with Localisation Loss Function](img/41b77f0687e596a85120540058d3b3e1.jpg)
 
 
@@ -711,13 +760,14 @@ softmax激活如下。
 
 按照惯例，通常将0.5用作阈值，以判断预测的边界框是否正确。 例如，如果IOU大于0.5，则可以说该预测是正确的答案。
 
-![](img/tex-f73c709124099e497ad22ae14efb498b.gif)也可以用作一种方法来衡量两个包围盒彼此之间的相似程度。
+![](img/tex-f73c709124099e497ad22ae14efb498b.gif)也可以用作一种方法来衡量两个边界框彼此之间的相似程度。
 
 
 
 ###### 非最大抑制
 
 ![Details of the Label](img/81b4a4993d1f7b3e049a38b489f62bb1.jpg)
+
 该算法可以找到对同一物体的多次检测。 例如，在上图中，它为猫找到2个边界框，为狗找到3个边界框。 非最大抑制算法可确保每个对象仅被检测一次。
 
 步骤：
@@ -745,9 +795,9 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 
 ![Anchor Box](img/74152ba95cdc0888eaa3727b43e24b28.jpg)
 
-**做出预测：**
+**做出预测**：
 
-*   对于每个网格单元，我们可以获得2个（锚框的数量）预测边界框。
+*   对于每个网格单元，我们可以获得2个（锚定框的数量）预测边界框。
 *   摆脱低概率预测
 *   对于每个类别（![](img/tex-576f1dacd615219d9f8bea06b26d5fdc.gif)，![](img/tex-71f0427a673c14326195285a092cc63a.gif)和![](img/tex-20b620923ab918a6f2b7a0eb419f8fc4.gif)），都使用非最大抑制来生成最终预测。
 
@@ -775,7 +825,7 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 
 可学习的参数：定义编码![](img/tex-50bbd36e1fd2333108437a2ca378be62.gif)的神经网络参数
 
-了解这些参数，以便：
+学习这些参数，以便：
 
 *   如果![](img/tex-e8fa5b806940d1b4d0059fba40646506.gif)和![](img/tex-b7762ca6ebcdab26862a6cd2ff27ac16.gif)是同​​一个人，则![](img/tex-a88d774af5bcbea106ee5b3213070c58.gif)较小
 *   如果![](img/tex-e8fa5b806940d1b4d0059fba40646506.gif)和![](img/tex-b7762ca6ebcdab26862a6cd2ff27ac16.gif)是不同的人，则![](img/tex-a88d774af5bcbea106ee5b3213070c58.gif)很大
@@ -800,18 +850,18 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 
 ![Triplet Loss](img/8658064c94e551580dfc6fc40311f14e.jpg)
 
-总结**损失函数**：
+汇总**损失函数**：
 
 ![Triplet Loss](img/56e2ad826d1e1a3b136c3c9a557d83ae.jpg)
 
 **选择A，P，N的三元组**：
-在训练期间，如果随机选择A，P，N，则很容易满足![](img/tex-b146114ae6c73f15901685e0c6ebc29e.gif)。 学习算法（即梯度下降不会做任何事情）。
+在训练期间，如果随机选择A，P，N，则很容易满足![](img/tex-b146114ae6c73f15901685e0c6ebc29e.gif)。 学习算法（即梯度下降）不会做任何事情。
 
 我们应该选择难以训练的三元组。
 
 !["Hard" Examples](img/8a381dcd6dcb4e62a4e969bf190f1db1.jpg)
 
-当使用硬三元组进行训练时，梯度下降过程必须做一些工作以尝试将这些量推离数量。
+当使用困难三元组进行训练时，梯度下降过程必须做一些工作以尝试将这些量推离。
 
 
 
@@ -824,6 +874,7 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 ![Binary Classification](img/fbd0943156b4673e32b075214ae2f454.jpg)
 
 我们还可以使用其他变量，例如卡方相似度：
+
 ![Binary Classification](img/edf420871dd74577dda7fd209f734fcb.jpg)
 
 
@@ -833,10 +884,12 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 ![Style Transfer](img/40a3d275da8195f4527bf7e9054d7660.jpg)
 
 内容图像来自电影Bolt。
+
 样式图像是“百马图”的一部分，这是中国最著名的古代绘画之一。
+
 [https://deepart.io](https://deepart.io) 支持生成的图像。
 
-损失函数![](img/tex-ff44570aca8241914870afbc310cdb85.gif)包含两部分：![](img/tex-d73fb9efd9342bb229c7e790a88efeb7.gif)和![](img/tex-8e3aab6f84d150812695b8c6c726cdcb.gif)。 查找生成的图像![](img/tex-dfcf28d0734569a6a693bc8194de62bf.gif)：
+损失函数![](img/tex-ff44570aca8241914870afbc310cdb85.gif)包含两部分：![](img/tex-d73fb9efd9342bb229c7e790a88efeb7.gif)和![](img/tex-8e3aab6f84d150812695b8c6c726cdcb.gif)。 为了得到生成的图像![](img/tex-dfcf28d0734569a6a693bc8194de62bf.gif)：
 
 1.  随机初始化图像![](img/tex-dfcf28d0734569a6a693bc8194de62bf.gif)
 2.  使用梯度下降来最大程度地降低![](img/tex-4849f51690a59d99b4984bf63f46f35a.gif)
@@ -849,9 +902,11 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 ![Select a Hidden Layer](img/bd9276d671c23a19e1b1f03891b176c9.jpg)
 
 2）
+
 ![Activation of Layer l](img/7d83297104da2f2842318354da75a29d.jpg)
 
 3）
+
 ![Content Cost](img/f8823ee03270ba318dc5c4d082720f4f.jpg)
 
 **样式成本函数，![](img/tex-8e3aab6f84d150812695b8c6c726cdcb.gif)** ：
@@ -867,9 +922,11 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 矩阵![](img/tex-dfcf28d0734569a6a693bc8194de62bf.gif)中的元素反映了跨不同通道的激活之间的相关性（例如，高级纹理成分是否倾向于同时出现或不出现）。
 
 对于样式图片：
+
 ![Matrix of the Style Image](img/7a862f24762df4d490ade0544cd2099c.jpg)
 
 对于生成的图像：
+
 ![Matrix G of the Generated Image](img/4b445d47336698613fb62ac067e9e55b.jpg)
 
 **样式函数**：
@@ -891,7 +948,7 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 
 #### 循环神经网络模型
 
-**前向：**
+**前向**：
 ![RNN](img/54e11fd6420aa2997cc8b0a6ee87fdcf.jpg)
 
 在此图中，红色参数是可学习的变量![](img/tex-61e9c06ea9a85a5088a499df6458d276.gif)和![](img/tex-92eb5ffee6ae2fec3ad71c777531578f.gif)。 在每个步骤的最后，将计算该步骤的损失。
@@ -904,7 +961,7 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 总损失：
 ![Total Loss](img/f3425400cc0e3bd1839fec53cea6436e.jpg)
 
-**时间上的反向传播：**
+**时间上的反向传播**：
 ![Backpropagation Through Time](img/d3ebbde1886376d977f009def80625c8.jpg)
 
 
@@ -979,7 +1036,7 @@ b）在最后一步中，将所有带有![](img/tex-011310f4e5761898d60b776931cb
 
 ##### Word2Vec & SkipGram
 
-**句子：**
+**句子**：
 
 ```
 I want a glass of orange juice to go along with my cereal.
@@ -994,6 +1051,7 @@ I want a glass of orange juice to go along with my cereal.
 ![Context and Target](img/bea872bddef8aee7cdfe1eef5aa31649.jpg)
 
 **模型**：
+
 ![Model](img/c3a5eb0a299f894c18f9c6ee3125501c.jpg)
 
 softmax函数定义为：
@@ -1008,7 +1066,7 @@ softmax函数定义为：
 
 ##### 负采样
 
-**句子：**
+**句子**：
 
 ```
 I want a glass of orange juice to go along with my cereal.
@@ -1026,6 +1084,7 @@ I want a glass of orange juice to go along with my cereal.
 我们仅训练softmax函数的![](img/tex-730357b6d1c395a3c78503916858d2ba.gif) logistic回归模型。 因此，计算量低得多且便宜。
 
 **如何选择负例？** ：
+
 ![Sampling Distribution](img/3aaf11fa1debadf3c45ba5d627a4217e.jpg)
 
 ![](img/tex-e87e05556972ea521be2107e22587e14.gif)是单词频率。
@@ -1058,25 +1117,33 @@ I want a glass of orange juice to go along with my cereal.
 ![](img/0fbba036e08140bf0fa7e04d64d3e69b.jpg)
 
 反向语言模型：类似地，
+
 ![](img/ab88920915a53affd485e518d4da10a6.jpg)
 
 双向语言模型：它结合了正向和反向语言模型。 共同最大化正向和后向的似然：
+
 ![](img/f578523d433261f9927e7a797d3bccc0.jpg)
 
 LSTM用于建模前向和后向语言模型。
+
 ![bidirectional language model](img/aaa6aac5f6ef75574c5744557bd23d3a.jpg)
 
 就输入嵌入而言，我们可以只初始化这些嵌入或使用预先训练的嵌入。 对于ELMo，通过使用字符嵌入和卷积层，会更加复杂，如下所示。
+
 ![Input Embeddings](img/a0ecfb35333ed66edf7464d94518166d.jpg)
 
 训练了语言模型之后，我们可以得到句子中单词的 ELMo 嵌入：
+
 ![ELMo](img/25d7b4760c8a1c565d1f162a46f7bbfc.jpg)
 
 在ELMo中，![](img/tex-03c7c0ace395d80182db07ae2c30f034.gif)是softmax归一化的权重，而![](img/tex-ae539dfcc999c28e25a0f3ae65c1de79.gif)是标量参数，允许任务模型缩放整个ELMo向量。 可以在任务特定模型的训练过程中学习这些参数。
 
 参考：
+
 [1] [https://www.slideshare.net/shuntaroy/a-review-of-deep-contextualized-word-representations-peters-2018](https://www.slideshare.net/shuntaroy/a-review-of-deep-contextualized-word-representations-peters-2018)
+
 [2] [http://jalammar.github.io/illustrated-bert/](http://jalammar.github.io/illustrated-bert/)
+
 [3] [https://www.mihaileric.com/posts/deep-contextualized-word-representations-elmo/](https://www.mihaileric.com/posts/deep-contextualized-word-representations-elmo/)
 
 
@@ -1086,6 +1153,7 @@ LSTM用于建模前向和后向语言模型。
 任务是将一个序列转换为另一个序列。 这两个序列可以具有不同的长度。
 
 ![Sequence to Sequence](img/af9339a9ae2cb9e6f83c65c773cab52e.jpg)
+
 ![Model](img/2fdc06ab9622f569d55a240a6f2c8a8a.jpg)
 
 
@@ -1113,9 +1181,13 @@ LSTM用于建模前向和后向语言模型。
 ###### 长度标准化
 
 翻译模型的学习将最大化：
+
 ![Beam Search (Beam Width = 3)](img/11f65adc5299b44a1b33eb8d3283915b.jpg)
+
 在对数空间中，即：
+
 ![Beam Search (Beam Width = 3)](img/9015bf98cde37867bed994713da2de11.jpg)
+
 上述目标函数的问题在于对数空间中的分数为 始终为负，因此使用此函数将使模型偏向一个很短的句子。 我们不希望翻译实际上太短。
 
 我们可以在开头添加一个长度标准化项：
@@ -1127,22 +1199,29 @@ LSTM用于建模前向和后向语言模型。
 在调整模型的参数时，我们需要确定它们的优先级（即，更应该归咎于RNN或集束搜索部分）。 （通常增加集束搜索宽度不会损害性能）。
 
 **示例**
+
 从开发集中选择一个句子并检查我们的模型：
 
-**句子：**`Jane visite l’Afrique en septembre.`
-**来自人类的翻译：**`Jane visits Africa in September. `（![](img/tex-67c77cc00e83a60647d826334509d2b3.gif)）
-**算法的输出（我们的模型）：**`Jane visited Africa last September. ` （![](img/tex-5d28a7ba1a44a73b8c2ed21321697c59.gif)）
+**句子**：`Jane visite l’Afrique en septembre.`
+
+**来自人类的翻译**：`Jane visits Africa in September. `（![](img/tex-67c77cc00e83a60647d826334509d2b3.gif)）
+
+**算法的输出（我们的模型）**：`Jane visited Africa last September. ` （![](img/tex-5d28a7ba1a44a73b8c2ed21321697c59.gif)）
 
 为了弄清楚应该归咎于哪个，我们需要根据RNN神经网络计算并比较![](img/tex-603569df3719a6cc5c457323985a836d.gif)和![](img/tex-20057ca553bcc6aa6ecbfa45a054f11f.gif)。
 
 如果![](img/tex-08a374edd701b759e50ffd97862937ff.gif)：
+
 ![](img/tex-89b3a69e7c4dd4ee4e7aaf09191ac8e1.gif)获得更高的概率，则可以得出结论，集束搜索存在故障。
 
-if ![](img/tex-3864a10efa8df8cb498267e9429b3493.gif)：
+如果 ![](img/tex-3864a10efa8df8cb498267e9429b3493.gif)：
+
 RNN预测![](img/tex-3864a10efa8df8cb498267e9429b3493.gif)，但实际上![](img/tex-67c77cc00e83a60647d826334509d2b3.gif)比![](img/tex-5d28a7ba1a44a73b8c2ed21321697c59.gif)更好，因为它来自真实的人。 因此，RNN模型应该有问题。
 
 通过在开发集中的多个实例上重复上述错误分析过程，我们可以得到下表：
+
 ![Beam Search (Beam Width = 3)](img/e8f365dc27ffb1321bade49b2e3570b5.jpg)
+
 根据该表，我们可以找出是由于集束搜索/ RNN。
 
 如果大多数错误是由于集束搜索造成的，请尝试增加集束搜索宽度。 否则，我们可能会尝试使RNN更深入/添加正则化/获取更多训练数据/尝试不同的架构。
@@ -1152,13 +1231,16 @@ RNN预测![](img/tex-3864a10efa8df8cb498267e9429b3493.gif)，但实际上![](img
 
 如果一个句子有多个出色的答案/推荐，我们可以使用Bleu得分来衡量模型的准确性。
 
-**示例（二元组的Bleu得分）：**
+**示例（二元组的Bleu得分）**：
 
-**法语：**` Le chat est sur le tapis.`
-**参考1：**`The cat is on the mat.`
-**参考2：**`There is a cat on the mat.`
+**法语**：` Le chat est sur le tapis.`
 
-**我们模型的输出：**`The cat the cat on the cat.`
+**参考1**：`The cat is on the mat.`
+
+**参考2**：`There is a cat on the mat.`
+
+**我们模型的输出**：`The cat the cat on the cat.`
+
 ![Bleu Score on Bigram Example](img/d4f52d3e06f69da44c0df114ec532d1c.jpg)
 
 **计数**是输出中出现的当前二元组的数量。 **截断计数**是二元组出现在参考1或参考2中的最大次数。
@@ -1201,15 +1283,20 @@ RNN（例如lstm）的一个问题是很难记住超长句子。 模型翻译质
 
 ### 转换器（“Attention Is All You Need”）
 
-**架构：**
+**架构**：
+
 ![Transformer](img/278f986550f8ebffa960c97a0f8b8a90.jpg)
-**详细信息：**
+
+**详细信息**：
+
 输入嵌入：
+
 模型的输入嵌入是单词嵌入及其每个单词的位置编码的总和。 例如，对于输入句子![](img/tex-9b1ba72483bca5814ae840215acb813c.gif)。 ![](img/tex-70e59a996bd69a0c21878b4093375e92.gif)是句子中每个单词的单词嵌入（可以是预训练的嵌入）。 输入嵌入应为![](img/tex-7b1956b4b0b4a0114d5b45c131157ae7.gif)。
 
 ![](img/tex-220b8d39c582b274a5e41ed6fe21b3cb.gif)是每个单词的位置编码。 有许多方法可以对单词位置进行编码。 在本文中，使用的编码方法是：
 
 ![](img/tex-c8fba499f56f79f11a335d94617afd59.gif)
+
 ![](img/tex-875900adbdb7a4d55a296caa523a36d2.gif)
 
 ![](img/tex-4757fe07fd492a8be0ea6a760d683d6e.gif)是单词在句子中的位置。 ![](img/tex-865c0c0b4ab0e063e5caa3387c1a8741.gif)是位置编码的元素位置。 ![](img/tex-885bd82dfe3227a0f7315eb81a6f3acb.gif)是模型中编码器的输出尺寸大小。
@@ -1229,16 +1316,21 @@ RNN（例如lstm）的一个问题是很难记住超长句子。 模型翻译质
 ### 转换器的双向编码器表示（BERT）
 
 BERT是通过堆叠转换器编码器构建的。
+
 ![BERT](img/ad5446e3f44bd8d4852aeb252ef13bbe.jpg)
 
 对未标记的大文本进行预训练（预测被掩盖的单词）
+
 ![BERT Pretrain](img/0ecd731042d32164b7fce874557ecdc8.jpg)
+
 “带掩码的语言模型会随机掩盖输入中的某些标记，目的是为了 仅根据上下文来预测被屏蔽单词的原始词汇ID。” [2]
 
 使用受监督的训练对特定任务（例如， 分类任务，NER等
+
 ![BERT Classification](img/636673655f87b5d52596f2ec92d53177.jpg)
 
 BERT论文的下图显示了如何将模型用于不同的任务。
+
 ![BERT on different tasks](img/cd5c079735781e239d47d6e8733d6063.jpg)
 
 如果特定任务不是分类任务，则可以忽略[CLS]。
@@ -1246,6 +1338,7 @@ BERT论文的下图显示了如何将模型用于不同的任务。
 参考：
 
 [1] http://jalammar.github.io/illustrated-bert/
+
 [2] Devlin, J., Chang, M.W., Lee, K. and Toutanova, K., 2018. Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805.
 
 
@@ -1294,6 +1387,7 @@ BERT论文的下图显示了如何将模型用于不同的任务。
 |  | 高方差 | 高偏差 | 高偏差和方差 | 低偏差和方差 |
 
 **解决方案**：
+
 ![solutions for high bias and variance](img/3c933dedf3303f72861bfa114404f5ed.jpg)
 
 ##### 与人类水平的表现比较
@@ -1359,11 +1453,12 @@ BERT论文的下图显示了如何将模型用于不同的任务。
 ![](img/tex-ed79728da37e7f67566dd01ea5108e96.gif)，
 ![](img/tex-573e4264476c5baeac0a6398fbea2624.gif)
 
-**！注意：**必须使用相同的![](img/tex-c9faf6ead2cd2c2187bd943488de1d0a.gif)和![](img/tex-10e16c6a764d367ca5077a54bf156f7e.gif)训练数据来标准化测试数据集。
+**注意**：必须使用相同的![](img/tex-c9faf6ead2cd2c2187bd943488de1d0a.gif)和![](img/tex-10e16c6a764d367ca5077a54bf156f7e.gif)训练数据来标准化测试数据集。
 
 使用输入标准化可以使训练更快。
 
 假设输入是二维![](img/tex-9eaecfed8f843923011652abc1b24521.gif)。 范围分别是![](img/tex-0d5fa3f335333b23d4aaf795d1336587.gif)和![](img/tex-e209e24a3d42a840c21481572570342f.gif)的[1-1000]和[1-10]。 损失函数可能看起来像这样（左）：
+
 ![left:non-normalized right: normalized](img/77223e53d8940a2a4ce83e0ba0b1a907.jpg)
 
 
@@ -1375,7 +1470,9 @@ BERT论文的下图显示了如何将模型用于不同的任务。
 例如，我们可以结合表现指标和运行时间，例如![](img/tex-935115e8fc9e3c2b5436ba6f18331427.gif)。
 
 另外，我们还可以指定可以接受的最大运行时间：
+
 ![](img/tex-e3f18d64de4ad0c3ebd7562f5ce69d7e.gif)
+
 ![](img/tex-4449fd1e9d3820a31eb52f3f88226f66.gif)
 
 
